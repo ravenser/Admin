@@ -6,13 +6,34 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+    <ion-card-content>
+      <ion-card *ngFor="let company of companylst.companyList; let j = index">
+        <ion-card *ngIf="!showDetails[j]" text-wrap>
+            <ion-item> {{company.id}} </ion-item>
+            <ion-item> {{company.name}} </ion-item>
+            <ion-item> {{company.rating}} </ion-item>
+            <ion-item> {{company.image}} </ion-item>
+            <ion-item> {{company.description}} </ion-item>
+            <ion-card *ngFor="let service of company.services"> </ion-card>
+            <ion-item> {{service}}</ion-item>
+            <ion-card *ngFor="let city of company.cities"> </ion-card>
+            <ion-item> {{city}}</ion-item>
+            <ion-item> {{company.city}} </ion-item>
+            <ion-item> {{company.region}} </ion-item>
+            <ion-item> {{company.recountrygion}} </ion-item>
+            <ion-button (click) = "toggleDetailsOn(j)">Подробиці</ion-button>
+        </ion-card>
+        <ion-card *ngIf="showDetails[j]"> 
+          <ion-item> <ion-input value = "{{actor.name}}" #name></ion-input></ion-item>
+          <ion-item> <ion-input value = "{{actor.age}}"  #age></ion-input></ion-item>
+          <ion-item> <ion-input value = "{{actor.spectacle}}" #spectacle></ion-input></ion-item>
+          <ion-button (click) = "redactActor(actor, name.value, age.value, spectacle.value, j)">Редагувати</ion-button>
+          <ion-button (click) = "deleteActor(actor, j)">Видалити</ion-button>
+        </ion-card>
+      </ion-card>
+    </ion-card-content> 
+  </ion-card>
+  
   <div id="container">
     <strong>Ready to create an app?</strong>
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
